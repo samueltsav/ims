@@ -1,0 +1,12 @@
+{% extends "imsApp/layout.html" %}
+{% block title %}Delete Product{% endblock %}
+{% block content %}
+    <h1>
+        You are about to delete this product. This action cannot be undone. Do you want to continue?
+    </h1>
+    <form method="POST" class="text-center">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes</button>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock content %}
