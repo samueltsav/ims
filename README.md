@@ -1,2 +1,2 @@
 # ims
-IMS-Inventory Management System, developed with Python and Django and uses Postgres database.
+Your one-stop inventory management system, developed with Python and Django and using Postgres database.
