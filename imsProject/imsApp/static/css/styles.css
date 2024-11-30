@@ -1,0 +1,22 @@
+body{
+    padding-top: 56px;
+}
+.navbar{
+    background-color: #343a40;
+}
+.navbar-brand, .nav-link{
+    color: #fff !important;
+}
+.container{
+    margin-top: 20px;
+}
+.table th, .table td{
+    vertical-align: middle;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    padding: .5px;
+    margin-left: 50px;  
+}
