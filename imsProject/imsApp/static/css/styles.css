@@ -14,9 +14,12 @@ body{
     vertical-align: middle;
 }
 
-.logo {
-    height: 50px;
-    width: 50px;
+.logo{
+    height: 8vh;
     padding: .5px;
-    margin-left: 50px;  
+    margin-left: 50px;
+}
+
+.error{
+    color: #ff000f;
 }
