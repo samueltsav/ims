@@ -13,23 +13,6 @@ from .models import Product
 def home_view(request):
     return render(request, 'imsApp/home.html')
 
-
-# Register View
-def register_view(request):
-    if request == "POST":
-        form = RegUserForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = User.objects.create_user(email=email, username=username, password=password)
-            login(request, user)
-            return redirect('home')
-    else:
-        form = RegUserForm()
-    return render(request, 'accounts/register.html', {'form': form})
-    
-
 # Login View
 def login_view(request):
     error_message = None
@@ -54,7 +37,6 @@ def logout_view(request):
     else:
         return redirect('home')
 
-
 # Create View
 def product_create_view(request):
     form = ProductForm()
@@ -65,12 +47,10 @@ def product_create_view(request):
             return redirect('product_list')
     return render(request, 'imsApp/product_form.html', {'form':form})
 
-
 # Read View
 def product_list_view(request):
     products = Product.objects.all()
     return render(request, 'imsApp/product_list.html', {'products': products})
-
 
 # Update View
 def product_update_view(request, product_id):
@@ -83,7 +63,6 @@ def product_update_view(request, product_id):
             return redirect('product_list')
     return render(request, 'imsApp/product_form.html', {'form':form})
  
-
 # Delete View
 def product_delete_view(request, product_id):
     product = Product.objects.get(product_id=product_id)
@@ -91,7 +70,6 @@ def product_delete_view(request, product_id):
         product.delete()
         return redirect('product_list')
     return render(request, 'imsApp/product_confirm_delete.html', {'product': product})
-
 
 class ProtectedView(LoginRequiredMixin, View):
     login_url = '/login/'
