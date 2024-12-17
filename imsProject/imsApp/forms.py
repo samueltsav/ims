@@ -31,3 +31,24 @@ class ProductForm(forms.ModelForm):
             'supplier': forms.TextInput(
                 attrs={'placeholder': 'e.g. OMG Supplies', 'class': 'form-control' }),
         } 
+        
+        
+class RegUserForm(forms.ModelForm):
+    email = forms.EmailField(widget=forms.EmailInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+    password_confirm = forms.CharField(widget=forms.PasswordInput, label="Confirm Password")
+        
+    class Meta:
+        model = User
+        fields = ['email', 'username', 'password', 'password_confirm']
+        
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        password_confirm = cleaned_data.get('password_confirm')
+        if password and password_confirm and password != password_confirm:
+            raise forms.ValidationError('Passwords don not match!')
+        return cleaned_data

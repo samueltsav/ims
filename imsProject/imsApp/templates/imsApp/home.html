@@ -14,10 +14,9 @@
         <p>
             Keep track of your products with this simple, user-friendly system.
         </p>
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg" role="button">View Products</a>
-            <button type="submit" class="btn btn-primary btn-lg">Logout</button>
-        </form>
+         <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg" role="button">
+            View Products
+         </a>
+        
     </div>
 {% endblock %}

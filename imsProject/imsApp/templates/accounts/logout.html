@@ -13,10 +13,10 @@
         <div class="container">
         <h2>Logout</h2>
         <p>Are you sure you want to logout?</p>
-        <form methond="POST" action="{% url 'logout' %}">
+        <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit">Logout</button>
-            <a href="{% url, 'home' %}">Cancel</a>
+            <a href="{% url 'logout' %}">Cancel</a>
         </form>
     </body>
 </html>

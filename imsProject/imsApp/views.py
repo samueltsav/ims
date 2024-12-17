@@ -3,12 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from django import forms
-
-
-
-# Create your views here.
-from .forms import ProductForm
+from django.contrib.auth.models import User
+from .forms import ProductForm, RegUserForm
 from .models import Product
 
 
@@ -18,6 +14,21 @@ def home_view(request):
     return render(request, 'imsApp/home.html')
 
 
+# Register View
+def register_view(request):
+    if request == "POST":
+        form = RegUserForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = User.objects.create_user(email=email, username=username, password=password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = RegUserForm()
+    return render(request, 'accounts/register.html', {'form': form})
+    
 
 # Login View
 def login_view(request):
@@ -25,6 +36,7 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        password_confirm = request.POST.get('password_confirm')
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
